@@ -4,11 +4,11 @@ Tasks:
 
 - create REST API with bearer authentication and 2 database collections - Done.
 - allow us to store 2 PDFs - Can upload 1 pdf at a time but every user may store multiple pdfs in the database.
-- password protect both PDF documents from being opened on the client - Not Completed
+- password protect both PDF documents from being opened on the client - Not yet completed.
 
 backend to be used: Laravel, mySQL or equivalent for DB - Laravel/mySQL used.
 
-optional: create Javascript client (web app) to connect to the REST API, the client should allow 2 PDFs to be uploaded
+optional: create Javascript client (web app) to connect to the REST API, the client should allow 2 PDFs to be uploaded - Not yet completed.
 
 
 How to run instructions:
@@ -38,5 +38,3 @@ Please click on your browser's back button to return to the preceding page.
 Click on List to see all uploaded PDFs.
 It does not yet allow you to view individual PDFs.
 It does not yet ask you for a password to view the individual PDFs.
-
-
