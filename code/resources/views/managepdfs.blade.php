@@ -1,6 +1,3 @@
-<!-- Code from: https://appdividend.com/2018/08/15/laravel-file-upload-example/#3_Create_a_View_and_Route_for_uploading_files
-Used and adopted for this purpose -->
-
 @extends('layouts.app')
 
 @section('content')
@@ -31,8 +28,13 @@ Used and adopted for this purpose -->
 						<div class="form-group row">
 							<input type="file" name="pdf"> </input>
 						</div>
-
-                        <div class="form-group row mb-0">
+						
+						<div class="form-group row">
+							<label for="pdf_password" class="form-label">Enter Password for PDF</label>
+							<input type="password" class="form-control" name="pdf_password" id="pdf_passwordid" />
+						</div>
+                        
+						<div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Upload') }}

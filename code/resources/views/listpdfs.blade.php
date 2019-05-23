@@ -1,8 +1,3 @@
-<!--NOT YET WORKING-->
-
-<!-- Code from: https://appdividend.com/2018/08/15/laravel-file-upload-example/#3_Create_a_View_and_Route_for_uploading_files
-Used and adopted for this purpose -->
-
 @extends('layouts.app')
 
 @section('content')
@@ -25,19 +20,22 @@ Used and adopted for this purpose -->
 				<div class="card-body">
                 
 				<label for="pdf[]">Existing pdfs:</label><br>
-						@//dd()
-                        @//if(count() > 0)
+                        <?php if(count($pdfs) > 0) : ?>
                             <ul class="list-group">
-                                @foreach($form->pdf as $key => $pdf)
+                                @foreach($pdfs as $pdf)
                                     <li class="list-group-item " id="pdf-{{$pdf->id}}">
-                                        <input type="hidden" name="currentPDFs[]" value="{{$pdfs->id}}">
+                                        <input type="hidden" name="currentPDFs[]" value="{{$pdf->id}}">
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="pull-left">
-                                                    {{$pdf->name}}
+                                                    {{$pdf->pdf_name}}
                                                 </div>
+												<div class="form-group row">
+													<label for="pdf_password" class="form-label">Enter Password to view PDF</label>
+													<input type="password" class="form-control" name="pdf_password" id="pdf_passwordid" />
+												</div>
                                                 <div class="pull-right">
-                                                    <a style="cursor: pointer; color: blue;" onClick="preview('/uploads/{{$pdf->url}}')">View PDF</a> | 
+                                                    <a class='nav-link' href="{{ route('showPdf',['id'=>$pdf->id]) }}" style="cursor: pointer; color: blue;">View PDF</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -45,9 +43,9 @@ Used and adopted for this purpose -->
                                     </li>
                                 @endforeach
                             </ul>
-                        @//else
+                        @else :
                             <h2>No PDFs uploaded</h2>
-                        @//endif				
+                        @endif
                 </div>
 				
             </div>
