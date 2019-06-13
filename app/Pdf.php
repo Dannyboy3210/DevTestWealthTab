@@ -20,7 +20,7 @@ class Pdf extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'pdf_name', 'password', 'pdf'
+        'creator_id', 'pdf_name' //'pdf' is being removed  //'password' is Being replaced with a user-pdf permissions table
     ];
 
     /**
@@ -29,7 +29,7 @@ class Pdf extends Model
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'remember_token' //'password' is Being replaced with a user-pdf permissions table
     ];
 
     /**
@@ -44,5 +44,10 @@ class Pdf extends Model
 	public function user()
 	{
 	   return $this->belongsTo(User::class);
-	}
+    }
+    
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class);
+    }
 }

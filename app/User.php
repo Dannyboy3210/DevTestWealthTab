@@ -45,5 +45,11 @@ class User extends Authenticatable
 	public function uploads()
 	{
 	   return $this->hasMany(Upload::class);
-	}
+    }
+    
+    //Not sure if below is needed yet
+    /*public function permissions()
+    {
+        return $this->hasMany(Permission::class);
+    }*/
 }

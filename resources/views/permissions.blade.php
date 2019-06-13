@@ -15,9 +15,9 @@
                     @endif
                 </div>
                 <label for="pdf[]">Users with Permission:</label><br>
-                        @if(!isset($users))
+                        @if(isset($users) && count($users) > 0)
                             <ul class="list-group">
-                                @if($users instanceof Collection)
+                                @if(count($users) > 1)
                                     @foreach($users as $user)
                                         <li class="list-group-item " id="user-{{$user->user}}">
                                             <input type="hidden" name="currentPerms[]" value="{{$user->name}}">
@@ -29,23 +29,37 @@
                                                     <div class="pull-right">
                                                         {{$user->email}}
                                                     </div>
+                                                    <div class="pull-right">
+                                                        <form method="POST" action="{{ route('removePerm', ['$userID'=>$user->id, 'pdfID'=>$pdf]) }}" aria-label="{{ __('removePerm') }}" enctype="multipart/form-data">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-primary">
+                                                                {{ __('Remove Permission') }}
+                                                            </button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </li>
                                     @endforeach
                                 @else
-                                    @if(count($users) == 1)
                                     <div class="row">
                                     <div class="col-12">
                                         <div class="pull-left">
-                                            {{$users->name}}
+                                            {{$users[0]->name}}
                                         </div>
                                         <div class="pull-right">
-                                            {{$users->email}}
+                                            {{$users[0]->email}}
+                                        </div>
+                                        <div class="pull-right">
+                                        <form method="POST" action="{{ route('removePerm', ['$userID'=>$users[0]->id, 'pdfID'=>$pdf]) }}" aria-label="{{ __('removePerm') }}" enctype="multipart/form-data">
+                                            @csrf
+                                            <button type="submit" class="btn btn-primary">
+                                                {{ __('Remove Permission') }}
+                                            </button>
+                                        </form>
                                         </div>
                                     </div>
                                     </div>
-                                    @endif
                                 @endif
 
                             </ul>

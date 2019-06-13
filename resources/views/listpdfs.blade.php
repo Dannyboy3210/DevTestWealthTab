@@ -24,19 +24,19 @@
                             <ul class="list-group">
                                 @foreach($pdfs as $pdf)
                                     <li class="list-group-item " id="pdf-{{$pdf->id}}">
-                                        <input type="hidden" name="currentPDFs[]" value="{{$pdf->id}}">
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="pull-left">
                                                     {{$pdf->pdf_name}}
                                                 </div>
-												<div class="form-group row">
-													<label for="pdf_password" class="form-label">Enter Password to view PDF</label>
-													<input type="password" class="form-control" name="pdf_password" id="pdf_passwordid" />
-												</div>
                                                 <div class="pull-right">
                                                     <a class='nav-link' href="{{ route('showPdf',['id'=>$pdf->id]) }}" style="cursor: pointer; color: blue;">View PDF</a>
                                                 </div>
+                                                @if ($pdf->creator_id == Auth::id())
+                                                    <div class="pull-right">
+                                                        <a class='nav-link' href="{{ route('managePerm',['pdf'=>$pdf]) }}" style="cursor: pointer; color: blue;">Manage Permissions</a>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                         

@@ -15,10 +15,10 @@ class CreatePdfsTable extends Migration
     {
         Schema::create('pdfs', function (Blueprint $table) {
             $table->bigIncrements('id');
-			$table->integer('user_id');
+			$table->integer('creator_id');
 			$table->string('pdf_name');
-			$table->string('password');
-			$table->longtext('pdf')->nullable();
+			//$table->string('password'); //Being replaced with a user-pdf permissions table
+			//$table->longtext('pdf')->nullable(); //Using local storage instead
             //$table->timestamp('pdf_uploaded_at')->nullable();
 			$table->timestamps();
             $table->rememberToken();

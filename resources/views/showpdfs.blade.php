@@ -16,9 +16,7 @@
 				</div>
 				<div>
 					<?php 
-						//echo "test";
 						header('Content-type: application/pdf');
-						//dd $pdf;
 						echo $pdf;
 					?>
 				</div>

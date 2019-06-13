@@ -21,6 +21,11 @@ Route::get('/pdf/upload', 'PDFController@index')->name('pdfUpload');
 Route::post('/pdf/upload', 'PDFController@uploadPDF')->name('pdfUpload');
 
 Route::get('/pdf/list', 'PDFController@listPdf')->name('listPdf');
+Route::post('/pdf/list', 'PDFController@listPdf')->name('listPdf');
+
+Route::get('/pdf/perm', 'PermissionController@managePdf')->name('managePerm');
+Route::post('/pdf/perm', 'PermissionController@addPermission')->name('managePerm');
+Route::post('/pdf/perm/{id}/{pdf}', 'PermissionController@removePermission')->name('removePerm');
 
 Route::get('/pdf/{id}', 'PDFController@show')->name('showPdf');
 
