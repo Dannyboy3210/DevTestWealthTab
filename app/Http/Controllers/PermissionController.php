@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use App\User;
@@ -24,13 +25,21 @@ class PermissionController extends Controller
     
     public function addPermission(Request $request)
     {
-        if(Auth::user()->id == $request->pdf->creator_id){
-            $pdf = $request->pdf;
-            $email = $request->email;
-            $users = $request->users;
-            $pdfid = $request->id;
-            $user = User::where('email', '=', $email)->firstOrFail();   //See if email is valid
-            $userID = $user->id;
+        //If requester is the creator of the pdf and the user gaining permission is not the creator
+        $email = $request->email;
+        $pdfid = $request->id;
+        try {
+            $userAdding = User::where('email', '=', $email)->firstOrFail();
+        }
+        catch(ModelNotFoundException $e){
+            return "User not found";
+        }
+        //$userAdding = User::where('email', '=', $email)->firstOrFail();   //See if email is valid
+        $userID = $userAdding->id;
+        if($userAdding->id == Auth::user()->id){
+            Return "You already own this pdf";
+        }
+        else if(Auth::user()->id == Pdf::find($pdfid)->creator_id){
         
             $permExists = Permission::where('pdf_id', $pdfid)->where('user_id', $userID);
 
@@ -40,11 +49,13 @@ class PermissionController extends Controller
                 'pdf_id' => $pdfid,
                 'user_id' => $userID
                 ]);
-                echo 'test1';
-            };
-            //return view('permissions', ['users' => $users])->with(['pdf' => $request->pdf]);  //Bad idea to use this >=[
+                
+                return "Go back and refresh";
+            }
+            else {
+                return "User already had permission";
+            }
 
-            return "Go back and refresh";
         }
         else{
             return "You are not authorized to perform this action";

@@ -71,7 +71,6 @@
 				<div class="card-body">
                     <form method="POST" action="{{ route('managePerm') }}" aria-label="{{ __('managePerm') }}" enctype="multipart/form-data">
                         @csrf
-				        <input type="hidden" name="users" value="{{$users}}">
                         <input type="hidden" name="id" value="{{$pdf}}">
 						<div class="form-group row">
                             Enter email of user to give permission: <input type="text" name="email">
