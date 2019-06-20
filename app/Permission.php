@@ -44,4 +44,9 @@ class Permission extends Model
 	{
 	   return $this->belongsTo(PDF::class);
     }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

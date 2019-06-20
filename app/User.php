@@ -39,17 +39,22 @@ class User extends Authenticatable
 	
 	public function pdfs()
 	{
-		return $this->hasMany(PDF::class);
+		return $this->hasMany(PDF::class,'creator_id');
 	}	
 	
 	public function uploads()
 	{
 	   return $this->hasMany(Upload::class);
     }
-    
-    //Not sure if below is needed yet
-    /*public function permissions()
+
+    public function permissions()
     {
         return $this->hasMany(Permission::class);
-    }*/
+    }
+
+    public function hasAccess($pdf)
+    {
+        $pdfList = $this->pdfs;
+        return in_array($pdf,$pdfList->toArray()) || $this->id == $pdf->creator_id;
+    }
 }

@@ -35,30 +35,32 @@ class PermissionController extends Controller
             return "User not found";
         }
         //$userAdding = User::where('email', '=', $email)->firstOrFail();   //See if email is valid
+        $hasAccess = ($userAdding->hasAccess(Pdf::find($pdfid)));
         $userID = $userAdding->id;
         if($userAdding->id == Auth::user()->id){
             Return "You already own this pdf";
         }
-        else if(Auth::user()->id == Pdf::find($pdfid)->creator_id){
+        else if(!$userAdding->hasAccess(Pdf::find($pdfid))){
         
-            $permExists = Permission::where('pdf_id', $pdfid)->where('user_id', $userID);
-
+            //$permExists = Permission::where('pdf_id', $pdfid)->where('user_id', $userID)->first();
+            //dd($permExists);
+            //dd($user);
             //If email exists && permission does not previously exist: add permission
-            if (isset($user) && $permExists->count()==0) {
+           // if (isset($userAdding) && $hasAccess) {
                 Permission::create([
                 'pdf_id' => $pdfid,
                 'user_id' => $userID
                 ]);
                 
                 return "Go back and refresh";
-            }
-            else {
-                return "User already had permission";
-            }
+            //}
+            //else {
+                
+            //}
 
         }
         else{
-            return "You are not authorized to perform this action";
+            return "User already had permission";
         }
     }
 
