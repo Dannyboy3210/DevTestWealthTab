@@ -52,6 +52,11 @@ class User extends Authenticatable
         return $this->hasMany(Permission::class);
     }
 
+    /**
+     * Test if user has access to pdf (is owner or has permission)
+     * 
+     * @param Pdf
+     */
     public function hasAccess($pdf)
     {
         $pdfList = $this->pdfs;
