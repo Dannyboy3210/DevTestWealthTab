@@ -17,7 +17,7 @@ While using Vagrant to ssh into your homestead instance, go to ~/code and run th
 artisan migrate:fresh 
 to create databases.
 
-Visit Home page by going to http://192.168.10.10
+Visit Home page by going to http://homestead.local/
 
 In the top right, click on Home button.
 To log in, either register a new account or log into your existing account.
